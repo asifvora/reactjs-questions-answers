@@ -1,4 +1,4 @@
-# React Interview Questions & Answers
+# React Questions & Answers
 
 > Click :star:if you like the project. Pull Request are highly appreciated.
 
