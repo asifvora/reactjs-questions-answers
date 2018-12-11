@@ -251,6 +251,25 @@
 |235| [What is the behavior of uncaught errors in react 16?](#what-is-the-behavior-of-uncaught-errors-in-react-16)|
 |236| [What is the proper placement for error boundaries?](#what-is-the-proper-placement-for-error-boundaries)|
 |237| [What is the benefit of component stack trace from error boundary?](#what-is-the-benefit-of-component-stack-trace-from-error-boundary)|
+|238| [What is the required method to be defined for a class component?](#what-is-the-required-method-to-be-defined-for-a-class-component)|
+|239| [What are the possible return types of render method?](#what-are-the-possible-return-types-of-render-method)|
+|240| [What is the main purpose of constructor?](#what-is-the-main-purpose-of-constructor)|
+|241| [Is it mandatory to define constructor for React component?](#is-it-mandatory-to-define-constructor-for-react-component)|
+|242| [What are default props?](#what-are-default-props)|
+|243| [Why should not call setState in componentWillUnmount?](#why-should-not-call-setstate-in-componentwillunmount)|
+|244| [What is the purpose of getDerivedStateFromError?](#what-is-the-purpose-of-getderivedstatefromerror)|
+|245| [What is the methods order when component re-rendered?](#what-is-the-methods-order-when-component-re-rendered)|
+|246| [What are the methods invoked during error handling?](#what-are-the-methods-invoked-during-error-handling)|
+|247| [What is the purpose of displayName class property?](#what-is-the-purpose-of-displayname-class-property)|
+|248| [What is the browser support for react applications?](#what-is-the-browser-support-for-react-applications)|
+|249| [What is the purpose of unmountComponentAtNode method?](#what-is-the-purpose-of-unmountcomponentatNode-method)|
+|250| [What is code-splitting?](#what-is-code-splitting)|
+|251| [What is the benefit of strict mode?](#what-is-the-benefit-of-strict-mode)|
+|252| [What are Keyed Fragments?](#what-are-keyed-fragments)|
+|253| [Is it React support all HTML attributes?](#is-it-react-support-all-html-attributes)|
+|254| [What are the limitations with HOCs?](#what-are-the-limitations-with-hocs)|
+|255| [How to debug forwardRefs in DevTools?](#how-to-debug-forwardrefs-in-devtools)|
+|256| [When component props defaults to true?](#when-component-props-defaults-to-true)|
 
 ## Core React
 
@@ -542,14 +561,16 @@
     ```jsx harmony
     <h1>Hello!</h1>
     {
-      messages.length > 0 &&
-      <h2>
-        You have {messages.length} unread messages.
-      </h2>
+        messages.length > 0 && !isLogin?
+          <h2>
+              You have {messages.length} unread messages.
+          </h2>
+          :
+          <h2>
+              You don't have unread messages.
+          </h2>
     }
     ```
-
-    <!-- TODO: fix this section -->
 
 18. ### What are "key" props and what is the benefit of using them in arrays of elements?
 
@@ -1032,7 +1053,7 @@
     ReactDOM.createPortal(child, container)
     ```
 
-    The first argument is any renderable React child, such as an element, string, or fragment. The second argument is a DOM element.
+    The first argument is any render-able React child, such as an element, string, or fragment. The second argument is a DOM element.
 
 49. ### What are stateless components?
 
@@ -1620,12 +1641,7 @@
     }
     ```
 
-    In the example above, the *strict mode* checks apply to `<ComponentOne>` and `<ComponentTwo>` components only. `<StrictMode>` currently helps with:
-
-    1. Identifying components with **unsafe lifecycle methods**.
-    2. Warning about **legacy string ref** API usage.
-    3. Detecting unexpected **side effects**.
-    4. Detecting **legacy context** API.
+    In the example above, the *strict mode* checks apply to `<ComponentOne>` and `<ComponentTwo>` components only.
 
 84. ### What are React Mixins?
 
@@ -4033,6 +4049,265 @@
      Apart from error messages and javascript stack, React16 will display the component stack trace with file names and line numbers using error boundary concept. For example, BuggyCounter component displays the component stack trace as below,
 
      ![stacktrace](images/error_boundary.png)
+
+238. ### What is the required method to be defined for a class component?
+     The render() method is the only required method in a class component. i.e, All methods other than render method are optional for a class component.
+239. ### What are the possible return types of render method?
+     Below are the list of following types used and return from render method,
+     1. **React elements:** Elements that instruct React to render a DOM node. It includes html elements such as <div/> and user defined elements.
+     2. **Arrays and fragments:** Return multiple elements to render as Arrays and Fragments to wrap multiple elements
+     3. **Portals:** Render children into a different DOM subtree.
+     4. **String and numbers:** Render both Strings and Numbers as text nodes in the DOM
+     5. **Booleans or null:** Doesn't render anything but these types are used to conditionally render content.
+
+240. ### What is the main purpose of constructor?
+     The constructor is mainly used for two purposes,
+     1. To initialize local state by assigning object to this.state
+     2. For binding event handler methods to the instatnce
+     For example, the below code covers both the above casess,
+     ```javascript
+     constructor(props) {
+       super(props);
+       // Don't call this.setState() here!
+       this.state = { counter: 0 };
+       this.handleClick = this.handleClick.bind(this);
+     }
+     ```
+241. ### Is it mandatory to define constructor for React component?
+     No, it is not mandatory. i.e, If you don’t initialize state and you don’t bind methods, you don’t need to implement a constructor for your React component.
+242. ### What are default props?
+     The defaultProps are defined as a property on the component class to set the default props for the class. This is used for undefined props, but not for null props. For example, let us create color default prop for the button component,
+     ```javascript
+     class MyButton extends React.Component {
+       // ...
+     }
+
+     MyButton.defaultProps = {
+       color: 'red'
+     };
+
+     ```
+
+     If props.color is not provided then it will set the default value to 'red'. i.e, Whenever you try to access the color prop it uses default value
+     ```javascript
+     render() {
+        return <MyButton /> ; // props.color will be set to red
+      }
+     ```
+     **Note:** If you provide null value then it remains null value.
+243. ### Why should not call setState in componentWillUnmount?
+     You should not call setState() in componentWillUnmount() because Once a component instance is unmounted, it will never be mounted again.
+244. ### What is the purpose of getDerivedStateFromError?
+     This lifecycle method is invoked after an error has been thrown by a descendant component. It receives the error that was thrown as a parameter and should return a value to update state. The signature of the lifecycle method is as follows,
+     ```javascript
+     static getDerivedStateFromError(error)
+     ```
+     Let us take error boundary use case with the above lifecycle method for demonistration purpose,
+     ```javascript
+     class ErrorBoundary extends React.Component {
+       constructor(props) {
+         super(props);
+         this.state = { hasError: false };
+       }
+
+       static getDerivedStateFromError(error) {
+         // Update state so the next render will show the fallback UI.
+         return { hasError: true };
+       }
+
+       render() {
+         if (this.state.hasError) {
+           // You can render any custom fallback UI
+           return <h1>Something went wrong.</h1>;
+         }
+
+         return this.props.children;
+       }
+     }
+     ```
+245. ### What is the methods order when component re-rendered?
+     An update can be caused by changes to props or state. The below methods are called in the following order when a component is being re-rendered.
+     1. static getDerivedStateFromProps()
+     2. shouldComponentUpdate()
+     3. render()
+     4. getSnapshotBeforeUpdate()
+     5. componentDidUpdate()
+
+246. ### What are the methods invoked during error handling?
+     Below methods are called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component.
+     1. static getDerivedStateFromError()
+     2. componentDidCatch()
+247. ### What is the purpose of displayName class property?
+     The displayName string is used in debugging messages. Usually, you don’t need to set it explicitly because it’s inferred from the name of the function or class that defines the component. You might want to set it explicitly if you want to display a different name for debugging purposes or when you create a higher-order component.
+     For example, To ease debugging, choose a display name that communicates that it’s the result of a withSubscription HOC.
+     ```javascript
+     function withSubscription(WrappedComponent) {
+       class WithSubscription extends React.Component {/* ... */}
+       WithSubscription.displayName = `WithSubscription(${getDisplayName(WrappedComponent)})`;
+       return WithSubscription;
+     }
+     function getDisplayName(WrappedComponent) {
+       return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+     }
+     ```
+248. ### What is the browser support for react applications?
+     React supports all popular browsers, including Internet Explorer 9 and above, although some polyfills are required for older browsers such as IE 9 and IE 10. If you use  **es5-shim and es5-sham** polyfill then it even support old browsers that doesn't support ES5 methods.
+249. ### What is the purpose of unmountComponentAtNode method?
+     This method is available from react-dom package and it removes a mounted React component from the DOM and clean up its event handlers and state. If no component was mounted in the container, calling this function does nothing. Returns true if a component was unmounted and false if there was no component to unmount.
+     The method signature would be as follows,
+     ```javascript
+     ReactDOM.unmountComponentAtNode(container)
+     ```
+250. ### What is code-splitting?
+     Code-Splitting is a feature supported by bundlers like Webpack and Browserify which can create multiple bundles that can be dynamically loaded at runtime. The react project supports code splitting via dynamic import() feature.
+     For example, in the below code snippets, it will make moduleA.js and all its unique dependencies as a separate chunk that only loads after the user clicks the 'Load' button.
+     **moduleA.js**
+     ```javascript
+     const moduleA = 'Hello';
+
+     export { moduleA };
+     ```
+     **App.js**
+     ```javascript
+     import React, { Component } from 'react';
+
+     class App extends Component {
+       handleClick = () => {
+         import('./moduleA')
+           .then(({ moduleA }) => {
+             // Use moduleA
+           })
+           .catch(err => {
+             // Handle failure
+           });
+       };
+
+       render() {
+         return (
+           <div>
+             <button onClick={this.handleClick}>Load</button>
+           </div>
+         );
+       }
+     }
+
+     export default App;
+
+     ```
+251. ### What is the benefit of strict mode?
+     The <StrictMode> will be  helpful in the below cases
+
+     1. Identifying components with **unsafe lifecycle methods**.
+     2. Warning about **legacy string ref** API usage.
+     3. Detecting unexpected **side effects**.
+     4. Detecting **legacy context** API.
+     5. Warning about deprecated findDOMNode usage
+252. ### What are Keyed Fragments?
+     The Fragments declared with the explicit <React.Fragment> syntax may have keys. The general usecase is mapping a collection to an array of fragments as below,
+     ```javascript
+     function Glossary(props) {
+       return (
+         <dl>
+           {props.items.map(item => (
+             // Without the `key`, React will fire a key warning
+             <React.Fragment key={item.id}>
+               <dt>{item.term}</dt>
+               <dd>{item.description}</dd>
+             </React.Fragment>
+           ))}
+         </dl>
+       );
+     }
+     ```
+     **Note:** key is the only attribute that can be passed to Fragment. In the future, there might be a support for additional attributes, such as event handlers.
+253. ### Is it React support all HTML attributes?
+     As of React 16, both standard or custom DOM attributes are fully supported. Since React components often take both custom and DOM-related props, React uses the camelCase convention just like the DOM APIs. Let us take few props with respect to standard HTML attributes,
+     ```javascript
+     <div tabIndex="-1" />      // Just like node.tabIndex DOM API
+     <div className="Button" /> // Just like node.className DOM API
+     <input readOnly={true} />  // Just like node.readOnly DOM API
+     ```
+     These props work similarly to the corresponding HTML attributes, with the exception of the special cases. It also support all SVG attributes.
+254. ### What are the limitations with HOCs?
+
+     Higher-order components come with a few caveats apart from its benefits. Below are the few listed in an order
+     1. **Don’t Use HOCs Inside the render Method:**
+        It is not recommended to apply a HOC to a component within the render method of a component.
+        ```javascript
+        render() {
+          // A new version of EnhancedComponent is created on every render
+          // EnhancedComponent1 !== EnhancedComponent2
+          const EnhancedComponent = enhance(MyComponent);
+          // That causes the entire subtree to unmount/remount each time!
+          return <EnhancedComponent />;
+        }
+        ```
+        The above code impact performance by remounting a component that causes the state of that component and all of its children to be lost. Instead, apply HOCs outside the component definition so that the resulting component is created only once
+     2. **Static Methods Must Be Copied Over:**
+        When you apply a HOC to a component the new component does not have any of the static methods of the original component
+        ```javascript
+        // Define a static method
+        WrappedComponent.staticMethod = function() {/*...*/}
+        // Now apply a HOC
+        const EnhancedComponent = enhance(WrappedComponent);
+
+        // The enhanced component has no static method
+        typeof EnhancedComponent.staticMethod === 'undefined' // true
+        ```
+        You can overcome this by copying the methods onto the container before returning it
+        ```javascript
+        function enhance(WrappedComponent) {
+          class Enhance extends React.Component {/*...*/}
+          // Must know exactly which method(s) to copy :(
+          Enhance.staticMethod = WrappedComponent.staticMethod;
+          return Enhance;
+        }
+        ```
+     3. **Refs Aren’t Passed Through:**
+        For HOCs you need to pass through all props to the wrapped component but this does not work for refs. This is because ref is not really a prop similar to key. In this case you need to use the React.forwardRef API
+255. ### How to debug forwardRefs in DevTools?
+
+     **React.forwardRef** accepts a render function as parameter and DevTools uses this function to determine what to display for the ref forwarding component. For example, If you don't name the render function or not using displayName property then it will appear as ”ForwardRef” in the DevTools,
+     ```javascript
+     const WrappedComponent = React.forwardRef((props, ref) => {
+       return <LogProps {...props} forwardedRef={ref} />;
+     });
+     ```
+     But If you name the render function then it will appear as **”ForwardRef(myFunction)”**
+     ```javascript
+     const WrappedComponent = React.forwardRef(
+       function myFunction(props, ref) {
+         return <LogProps {...props} forwardedRef={ref} />;
+       }
+     );
+     ```
+     As an alternative, You can also set displayName property for forwardRef function,
+     ```javascript
+     function logProps(Component) {
+       class LogProps extends React.Component {
+         // ...
+       }
+
+       function forwardRef(props, ref) {
+         return <LogProps {...props} forwardedRef={ref} />;
+       }
+
+       // Give this component a more helpful display name in DevTools.
+       // e.g. "ForwardRef(logProps(MyComponent))"
+       const name = Component.displayName || Component.name;
+       forwardRef.displayName = `logProps(${name})`;
+
+       return React.forwardRef(forwardRef);
+     }
+     ```
+256. ### When component props defaults to true?
+     If you pass no value for a prop, it defaults to true. This behavior is available so that it matches the behavior of HTML. For example, below expressions are equivalent,
+     ```javascript
+     <MyInput autocomplete />
+
+     <MyInput autocomplete={true} />
+     ```
+     **Note:** It is not recommend using this approach because it can be confused with the ES6 object shorthand (example, {name} which is short for {name: name})
 
 
 ## Questions?🤔 
