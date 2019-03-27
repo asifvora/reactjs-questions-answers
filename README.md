@@ -270,6 +270,52 @@
 |254| [What are the limitations with HOCs?](#what-are-the-limitations-with-hocs)|
 |255| [How to debug forwardRefs in DevTools?](#how-to-debug-forwardrefs-in-devtools)|
 |256| [When component props defaults to true?](#when-component-props-defaults-to-true)|
+|257| [What is NextJS and major features of it?](#what-is-nextjs-and-major-features-of-it)|
+|258| [How do you pass an event handler to a component?](#how-do-you-pass-an-event-handler-to-a-component)|
+|259| [Is it good to use arrow functions in render methods?](#is-it-good-to-use-arrow-functions-in-render-methods)|
+|260| [How to prevent a function from being called multiple times?](#how-to-prevent-a-function-from-being-called-multiple-times)|
+|261| [How JSX prevents Injection Attacks?](#how-jsx-prevents-injection-attacks)|
+|262| [How do you update rendered elements?](#how-do-you-update-rendered-elements)|
+|263| [How do you say that props are read only?](#how-do-you-say-that-props-are-read-only)|
+|264| [How do you say that state updates are merged?](#how-do-you-say-that-state-updates-are-merged)|
+|265| [How do you pass arguments to an event handler?](#how-do-you-pass-arguments-to-an-event-handler)|
+|266| [How to prevent component from rendering?](#how-to-prevent-component-from-rendering)|
+|267| [What are the conditions to safely use the index as a key?](#What-are-the-conditions-to-safely-use-the-index-as-a-key)|
+|268| [Is it keys should be globally unique?](#is-it-keys-should-be-globally-unique)|
+|269| [What is the popular choice for form handling?](#what-is-the-popular-choice-for-form-handling)|
+|270| [What are the advantages of formik over redux form library?](#what-are-the-advantages-of-formik-over-redux-form-library)|
+|271| [Why do you not required to use inheritance?](#why-do-you-not-required-to-use-inheritance)|
+|272| [Can I use web components in react application?](#can-i-use-web-components-in-react-application)|
+|273| [What is dynamic import?](#what-is-dynamic-import)|
+|274| [What are loadable components?](#what-are-loadable-components)|
+|275| [What is suspense component?](#what-is-suspense-component)|
+|276| [What is route based code splitting?](#what-is-route-based-code-splitting)|
+|277| [Give an example on How to use context?](#give-an-example-on-how-to-use-context)|
+|278| [What is the purpose of default value in context?](#what-is-the-purpose-of-default-value-in-context)|
+|279| [How do you use contextType?](#how-do-you-use-contexttype)|
+|280| [What is a consumer?](#what-is-a-consumer)|
+|281| [How do you solve performance corner cases while using context?](#how-do-you-solve-performance-corner-cases-while-using-context)|
+|282| [What is the purpose of forward ref in HOCs?](#what-is-the-purpose-of-forward-ref-in-hocs)|
+|283| [Is it ref argument available for all functions or class components?](#is-it-ref-argument-available-for-all-functions-or-class-components)|
+|284| [Why do you need additional care for component libraries while using forward refs?](#why-do-you-need-additional-care-for-component-libraries-while-using-forward-refs)|
+|285| [How to create react class components without ES6?](#how-to-create-react-class-components-without-es6)|
+|286| [Is it possible to use react without JSX?](#is-it-possible-to-use-react-without-jsx)|
+|287| [What is diffing algorithm?](#what-is-diffing-algorithm)|
+|288| [What are the rules covered by diffing algorithm?](#what-are-the-rules-covered-by-diffing-algorithm)|
+|289| [When do you need to use refs?](#when-do-you-need-to-use-refs)|
+|290| [Is it prop must be named as render for render props?](#is-it-prop-must-be-named-as-render-for-render-props)|
+|291| [What are the problems of using render props with pure components?](#what-are-the-problems-of-using-render-props-with-pure-components)|
+|292| [How do you create HOC using render props?](#how-do-you-create-hoc-using-render-props)|
+|293| [What is windowing technique?](#what-is-windowing-technique)|
+|294| [How do you print falsy values in JSX?](#how-do-you-print-falsy-values-in-jsx)|
+|295| [What is the typical use case of portals?](#what-is-the-typical-use-case-of-portals?)|
+|296| [How do you set default value for uncontrolled component?](#how-do-you-set-default-value-for-uncontrolled-component)|
+|297| [What is your favorite React stack?](#what-is-your-favorite-react-stack)|
+|298| [What is the difference between Real DOM and Virtual DOM?](#what-is-the-difference-between-real-dom-and-virtual-dom)|
+|299| [How to add a bootstrap for a react application?](#how-to-add-a-bootstrap-for-a-react-application)|
+|300| [Can you list down top websites or applications using react as front end framework?](#can-you-list-down-top-websites-or-applications-using-react-as-front-end-framework)|
+|301| [Is it recommended to use CSS In JS technique in React?](#is-it-recommended-to-use-css-in-js-technique-in-react)|
+
 
 ## Core React
 
@@ -4308,6 +4354,644 @@
      <MyInput autocomplete={true} />
      ```
      **Note:** It is not recommend using this approach because it can be confused with the ES6 object shorthand (example, {name} which is short for {name: name})
+257. ### What is NextJS and major features of it?
+     Next.js is a popular and lightweight framework for static and server‑rendered applications built with React. It also provides styling and routing solutions. Below are the major features provided by NextJS,
+     1. Server-rendered by default
+     2. Automatic code splitting for faster page loads
+     3. Simple client-side routing (page based)
+     4. Webpack-based dev environment which supports (HMR)
+     5. Able to implement with Express or any other Node.js HTTP server
+     6. Customizable with your own Babel and Webpack configurations
+258. ### How do you pass an event handler to a component?
+     You can pass event handlers and other functions as props to child components. It can be used in child component as  below,
+     ```
+     <button onClick={this.handleClick}>
+     ```
+259. ### Is it good to use arrow functions in render methods?
+     Yes, You can use. It is often the easiest way to pass parameters to callback functions. But you need to optimize the performance while using it.
+     ```javascript
+     class Foo extends Component {
+       handleClick() {
+         console.log('Click happened');
+       }
+       render() {
+         return <button onClick={() => this.handleClick()}>Click Me</button>;
+       }
+     }
+     ```
+     **Note:** Using an arrow function in render method creates a new function each time the component renders, which may have performance implications
+260. ### How to prevent a function from being called multiple times?
+     If you use an event handler such as **onClick or onScroll** and want to prevent the callback from being fired too quickly, then you can limit the rate at which callback is executed. This can be achieved in the below possible ways,
+     1. **Throttling:** Changes based on a time based frequency. For example, it can be used using _.throttle lodash function
+     2. **Debouncing:** Publish changes after a period of inactivity. For example, it can be used using _.debounce lodash function
+     3. **RequestAnimationFrame throttling:** Changes based on requestAnimationFrame. For example, it can be used using raf-schd lodash function
+261. ### How JSX prevents Injection Attacks?
+     React DOM escapes any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered. For example, you can embed user input as below,
+     ```javascript
+     const name = response.potentiallyMaliciousInput;
+     const element = <h1>{name}</h1>;
+     ```
+     This way you can prevent XSS(Cross-site-scripting) attacks in the application.
+262. ### How do you update rendered elements?
+     You can update UI(represented by rendered element) by passing the newly created element to ReactDOM's render method. For example, lets take a ticking clock example, where it updates the time by calling render method multiple times,
+     ```javascript
+     function tick() {
+       const element = (
+         <div>
+           <h1>Hello, world!</h1>
+           <h2>It is {new Date().toLocaleTimeString()}.</h2>
+         </div>
+       );
+       ReactDOM.render(element, document.getElementById('root'));
+     }
+
+     setInterval(tick, 1000);
+     ```
+263. ### How do you say that props are read only?
+     When you declare a component as a function or a class, it must never modify its own props. Let us take a below capital function,
+     ```javascript
+     function capital(amount, interest) {
+        return amount + interest;
+     }
+     ```
+     The above function is called “pure” because it does not attempt to change their inputs, and always return the same result for the same inputs. Hence, React has a single rule saying "All React components must act like pure functions with respect to their props."
+264. ### How do you say that state updates are merged?
+     When you call setState() in the component, React merges the object you provide into the current state. For example, let us take a facebook user with posts and comments details as state variables,
+     ```javascript
+       constructor(props) {
+         super(props);
+         this.state = {
+           posts: [],
+           comments: []
+         };
+       }
+     ```
+     Now you can update them independently with separate setState() calls as below,
+     ```javascript
+      componentDidMount() {
+         fetchPosts().then(response => {
+           this.setState({
+             posts: response.posts
+           });
+         });
+
+         fetchComments().then(response => {
+           this.setState({
+             comments: response.comments
+           });
+         });
+       }
+     ```
+     As mentioned in the above code snippets, this.setState({comments}) updates only comments variable without modifying or replacing posts variable.
+265. ### How do you pass arguments to an event handler?
+     During iterations or loops, it is common to pass an extra parameter to an event handler. This can be achieved through arrow functions or bind method. Let us take an example of user details updated in a grid,
+     ```javascript
+     <button onClick={(e) => this.updateUser(userId, e)}>Update User details</button>
+     <button onClick={this.updateUser.bind(this, userId)}>Update User details</button>
+     ```
+     In both the approaches, the synthetic argument e is passed as a second argument. You need to pass it explicitly for arrow functions and it forwarded automatically for bind method.
+266. ### How to prevent component from rendering?
+     You can prevent component from rendering by returning null based on specific condition. This way it can conditionally render component.
+     ```javascript
+     function Greeting(props) {
+       if (!props.loggedIn) {
+         return null;
+       }
+
+       return (
+         <div className="greeting">
+           welcome, {props.name}
+         </div>
+       );
+     }
+     ```
+     ```javascript
+     class User extends React.Component {
+       constructor(props) {
+         super(props);
+         this.state = {loggedIn: false, name: 'John'};
+       }
+
+       render() {
+        return (
+            <div>
+              //Prevent component render if it is not loggedIn
+              <Greeting loggedIn={this.state.loggedIn} />
+              <UserDetails name={this.state.name}>
+            </div>
+        );
+       }
+     ```
+     In the above example, the greeting component skips its rendering section by applying condition and returning null value.
+267. ### What are the conditions to safely use the index as a key?
+     There are three conditions to make sure, it is safe use the index as a key.
+     1. The list and items are static– they are not computed and do not change
+     2. The items in the list have no ids
+     3. The list is never reordered or filtered.
+
+268. ### Is it keys should be globally unique?
+     Keys used within arrays should be unique among their siblings but they don’t need to be globally unique. i.e, You can use the same keys withtwo different arrays. For example, the below book component uses two arrays with different arrays,
+     ```javascript
+     function Book(props) {
+       const index = (
+         <ul>
+           {props.pages.map((page) =>
+             <li key={page.id}>
+               {page.title}
+             </li>
+           )}
+         </ul>
+       );
+       const content = props.pages.map((page) =>
+         <div key={page.id}>
+           <h3>{page.title}</h3>
+           <p>{page.content}</p>
+           <p>{page.pageNumber}</p>
+         </div>
+       );
+       return (
+         <div>
+           {index}
+           <hr />
+           {content}
+         </div>
+       );
+     }
+     ```
+269. ### What is the popular choice for form handling?
+     Formik is a form library for react which provides solutions such as validation, keeping track of the visited fields, and handling form submission. In detail, You can categorize them as follows,
+
+     1. Getting values in and out of form state
+     2. Validation and error messages
+     3. Handling form submission
+
+     It is used to create a scalable, performant, form helper with a minimal API to solve annoying stuff.
+270. ### What are the advantages of formik over redux form library?
+     Below are the main reasons to recommend formik over redux form library
+     1. The form state is inherently short-term and local, so tracking it in Redux (or any kind of Flux library) is unnecessary.
+     2. Redux-Form calls your entire top-level Redux reducer multiple times ON EVERY SINGLE KEYSTROKE. This way it increases input latency for large apps.
+     3. Redux-Form is 22.5 kB minified gzipped whereas Formik is 12.7 kB
+
+271. ### Why do you not required to use inheritance?
+     In React, it is recommend using composition instead of inheritance to reuse code between components. Both Props and composition give you all the flexibility you need to customize a component’s look and behavior in an explicit and safe way.
+     Whereas, If you want to reuse non-UI functionality between components, it is suggested to extracting it into a separate JavaScript module. Later components import it and use that function, object, or a class, without extending it.
+272. ### Can I use web components in react application?
+     Yes, you can use web components in a react application. Even though many developers won't use this combination, it may require especially if you are using third-party UI components that are written using Web Components. For example, let us  use Vaadin date picker web component as below,
+     ```javascript
+     import React, { Component } from 'react';
+     import './App.css';
+     import '@vaadin/vaadin-date-picker';
+     class App extends Component {
+       render() {
+         return (
+           <div className="App">
+             <vaadin-date-picker label="When were you born?"></vaadin-date-picker>
+           </div>
+         );
+       }
+     }
+     export default App;
+     ```
+273. ### What is dynamic import?
+     The dynamic import() syntax is a ECMAScript proposal not currently part of the language standard. It is expected to be accepted in the near future. You can achieve code-splitting into your app using dynamic import(). Let's take an example of addition,
+     1. **Normal Import**
+     ```javascript
+     import { add } from './math';
+     console.log(add(10, 20));
+     ```
+     2. **Dynamic Import**
+     ```javascript
+     import("./math").then(math => {
+       console.log(math.add(10, 20));
+     });
+     ```
+274. ### What are loadable components?
+     If you want to do code-splitting in a server rendered app, it is recommend to use Loadable Components because React.lazy and Suspense is not yet available for server-side rendering. Loadable lets you render a dynamic import as a regular component. Lets take an example,
+     ```javascript
+     import loadable from '@loadable/component'
+
+     const OtherComponent = loadable(() => import('./OtherComponent'))
+
+     function MyComponent() {
+       return (
+         <div>
+           <OtherComponent />
+         </div>
+       )
+     }
+     ```
+     Now OtherComponent will be loaded in a separated bundle
+275. ### What is suspense component?
+     If the module containing the dynamic import is not yet loaded by the time parent component renders, you must show some fallback content while you’re waiting for it to load using a loading indicator. This can be done using **Suspense** component. For example, the below code uses suspense component,
+     ```javascript
+     const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
+     function MyComponent() {
+       return (
+         <div>
+           <Suspense fallback={<div>Loading...</div>}>
+             <OtherComponent />
+           </Suspense>
+         </div>
+       );
+     }
+     ```
+     As mentioned in the above code, Suspense is wrapped above the lazy component.
+276. ### What is route based code splitting?
+     One of the best place to do code splitting is with routes. The entire page is going to re-render at once so users are unlikely to interact with other elements in the page at the same time. Due to this, the user experience won't be disturbed. Let us take an example of route based website using libraries like React Router with React.lazy,
+     ```javascript
+     import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+     import React, { Suspense, lazy } from 'react';
+
+     const Home = lazy(() => import('./routes/Home'));
+     const About = lazy(() => import('./routes/About'));
+
+     const App = () => (
+       <Router>
+         <Suspense fallback={<div>Loading...</div>}>
+           <Switch>
+             <Route exact path="/" component={Home}/>
+             <Route path="/about" component={About}/>
+           </Switch>
+         </Suspense>
+       </Router>
+     );
+     ```
+     In the above code, the code splitting will happen at each route level.
+277. ### Give an example on How to use context?
+     **Context** is designed to share data that can be considered **global** for a tree of React components.  For example, in the code below lets manually thread through a “theme” prop in order to style the Button component.
+     ```javascript
+     //Lets create a context with a default theme value "luna"
+     const ThemeContext = React.createContext('luna');
+     // Create App component where it uses provider to pass theme value in the tree
+     class App extends React.Component {
+       render() {
+         return (
+           <ThemeContext.Provider value="nova">
+             <Toolbar />
+           </ThemeContext.Provider>
+         );
+       }
+     }
+     // A middle component where you don't need to pass theme prop anymore
+     function Toolbar(props) {
+       return (
+         <div>
+           <ThemedButton />
+         </div>
+       );
+     }
+     // Lets read theme value in the button component to use
+     class ThemedButton extends React.Component {
+       static contextType = ThemeContext;
+       render() {
+         return <Button theme={this.context} />;
+       }
+     }
+     ```
+278. ### What is the purpose of default value in context?
+     The defaultValue argument is only used when a component does not have a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them. Below code snippet provides default theme value as Luna.
+     ```javascript
+     const MyContext = React.createContext(defaultValue);
+     ```
+279. ### How do you use contextType?
+     ContextType is used to consume the context object. The contextType property can be used in two ways,
+     1. **contextType as property of class:**
+     The contextType property on a class can be assigned a Context object created by React.createContext(). After that, you can consume the nearest current value of that Context type using this.context in any of the lifecycle methods and render function.
+     Lets assign contextType property on MyClass as below,
+     ```javascript
+     class MyClass extends React.Component {
+       componentDidMount() {
+         let value = this.context;
+         /* perform a side-effect at mount using the value of MyContext */
+       }
+       componentDidUpdate() {
+         let value = this.context;
+         /* ... */
+       }
+       componentWillUnmount() {
+         let value = this.context;
+         /* ... */
+       }
+       render() {
+         let value = this.context;
+         /* render something based on the value of MyContext */
+       }
+     }
+     MyClass.contextType = MyContext;
+     ```
+     2. **Static field**
+     You can use a static class field to initialize your contextType using public class field syntax.
+     ```javascript
+     class MyClass extends React.Component {
+       static contextType = MyContext;
+       render() {
+         let value = this.context;
+         /* render something based on the value */
+       }
+     }
+     ```
+280. ### What is a consumer?
+     A Consumer is a React component that subscribes to context changes. It requires a function as a child which receives current context value as argument and returns a react node. The value argument passed to the function will be equal to the value prop of the closest Provider for this context above in the tree. Lets take a simple example,
+     ```javascript
+     <MyContext.Consumer>
+       {value => /* render something based on the context value */}
+     </MyContext.Consumer>
+     ```
+281. ### How do you solve performance corner cases while using context?
+     The context uses reference identity to determine when to re-render, there are some gotchas that could trigger unintentional renders in consumers when a provider’s parent re-renders. For example, the code below will re-render all consumers every time the Provider re-renders because a new object is always created for value.
+     ```javascript
+     class App extends React.Component {
+       render() {
+         return (
+           <Provider value={{something: 'something'}}>
+             <Toolbar />
+           </Provider>
+         );
+       }
+     }
+     ```
+     This can be solved by lifting up the value to parent state,
+     ```javascript
+     class App extends React.Component {
+       constructor(props) {
+         super(props);
+         this.state = {
+           value: {something: 'something'},
+         };
+       }
+
+       render() {
+         return (
+           <Provider value={this.state.value}>
+             <Toolbar />
+           </Provider>
+         );
+       }
+     }
+     ```
+282. ### What is the purpose of forward ref in HOCs?
+     Refs will not get passed through because ref is not a prop. It handled differently by React just like **key**. If you add a ref to a HOC, the ref will refer to the outermost container component, not the wrapped component. In this case, you can use Forward Ref API. For example, we can explicitly forward refs to the inner FancyButton component using the React.forwardRef API.
+     The below HOC logs all props,
+     ```javascript
+     function logProps(Component) {
+       class LogProps extends React.Component {
+         componentDidUpdate(prevProps) {
+           console.log('old props:', prevProps);
+           console.log('new props:', this.props);
+         }
+
+         render() {
+           const {forwardedRef, ...rest} = this.props;
+
+           // Assign the custom prop "forwardedRef" as a ref
+           return <Component ref={forwardedRef} {...rest} />;
+         }
+       }
+
+       return React.forwardRef((props, ref) => {
+         return <LogProps {...props} forwardedRef={ref} />;
+       });
+     }
+     ```
+     Let's use this HOC to log all props that get passed to our “fancy button” component,
+     ```javascript
+     class FancyButton extends React.Component {
+       focus() {
+         // ...
+       }
+
+       // ...
+     }
+     export default logProps(FancyButton);
+     ```
+     Now lets create a ref and pass it to FancyButton component. In this case, you can set focus to button element.
+     ```javascript
+     import FancyButton from './FancyButton';
+
+     const ref = React.createRef();
+     ref.current.focus();
+     <FancyButton
+       label="Click Me"
+       handleClick={handleClick}
+       ref={ref}
+     />;
+     ```
+283. ### Is it ref argument available for all functions or class components?
+     Regular function or class components don’t receive the ref argument, and ref is not available in props either. The second ref argument only exists when you define a component with React.forwardRef call.
+284. ### Why do you need additional care for component libraries while using forward refs?
+     When you start using forwardRef in a component library, you should treat it as a breaking change and release a new major version of your library. This is because your library likely has a different behavior such as what refs get assigned to, and what types are exported. These changes can break apps and other libraries that depend on the old behavior.
+285. ### How to create react class components without ES6?
+     If you don’t use ES6 then you may need to use the create-react-class module instead. For default props, you need to define getDefaultProps() as a function on the passed object. Whereas for initial state, you have to provide a separate getInitialState method that returns the initial state.
+     ```javascript
+     var Greeting = createReactClass({
+       getDefaultProps: function() {
+           return {
+             name: 'Jhohn'
+           };
+         },
+       getInitialState: function() {
+           return {message: this.props.message};
+         },
+       handleClick: function() {
+          console.log(this.state.message);
+       },
+       render: function() {
+         return <h1>Hello, {this.props.name}</h1>;
+       }
+     });
+     ```
+     **Note:** If you use createReactClass then autobinding is available for all methods. i.e, You don't need to use .bind(this) with in constructor for event handlers.
+286. ### Is it possible to use react without JSX?
+     Yes, JSX is not mandatory for using React. Actually it is convenient when you don’t want to set up compilation in your build environment. Each JSX element is just syntactic sugar for calling React.createElement(component, props, ...children). For example, let us take a greeting example with JSX,
+     ```javascript
+     class Greeting extends React.Component {
+       render() {
+         return <div>Hello {this.props.message}</div>;
+       }
+     }
+
+     ReactDOM.render(
+       <Greeting message="World" />,
+       document.getElementById('root')
+     );
+     ```
+     You can write the same code without JSX as below,
+     ```javascript
+     class Greeting extends React.Component {
+       render() {
+         return React.createElement('div', null, `Hello ${this.props.message}`);
+       }
+     }
+
+     ReactDOM.render(
+       React.createElement(Greeting, {message: 'World'}, null),
+       document.getElementById('root')
+     );
+     ```
+287. ### What is diffing algorithm?
+     React needs to use algorithms to find out how to efficiently update the UI to match the most recent tree. The diffing algorithms is generating the minimum number of operations to transform one tree into another. However, the algorithms have a complexity in the order of O(n3) where n is the number of elements in the tree.
+     In this case, for displaying 1000 elements would require in the order of one billion comparisons. This is far too expensive. Instead, React implements a heuristic O(n) algorithm based on two assumptions:
+     1. Two elements of different types will produce different trees.
+     2. The developer can hint at which child elements may be stable across different renders with a key prop.
+288. ### What are the rules covered by diffing algorithm?
+     When diffing two trees, React first compares the two root elements. The behavior is different depending on the types of the root elements. It covers the below rules during reconsilation algorithm,
+     1. **Elements Of Different Types:**
+        Whenever the root elements have different types, React will tear down the old tree and build the new tree from scratch. For example,  elements <a> to <img>, or from <Article> to <Comment> of different types lead a full rebuild.
+     2. **DOM Elements Of The Same Type:**
+        When comparing two React DOM elements of the same type, React looks at the attributes of both, keeps the same underlying DOM node, and only updates the changed attributes. Lets take an example with same DOM eleemnts except className attribute,
+        ```javascript
+        <div className="show" title="ReactJS" />
+
+        <div className="hide" title="ReactJS" />
+        ```
+     3. **Component Elements Of The Same Type:**
+        When a component updates, the instance stays the same, so that state is maintained across renders. React updates the props of the underlying component instance to match the new element, and calls componentWillReceiveProps() and componentWillUpdate() on the underlying instance. After that, the render() method is called and the diff algorithm recurses on the previous result and the new result.
+     4. **Recursing On Children:**
+        when recursing on the children of a DOM node, React just iterates over both lists of children at the same time and generates a mutation whenever there’s a difference. For example, when adding an element at the end of the children, converting between these two trees works well.
+        ```javascript
+        <ul>
+          <li>first</li>
+          <li>second</li>
+        </ul>
+
+        <ul>
+          <li>first</li>
+          <li>second</li>
+          <li>third</li>
+        </ul>
+
+        ```
+     5. **Handling keys:**
+     React supports a key attribute. When children have keys, React uses the key to match children in the original tree with children in the subsequent tree. For example, adding a key can make the tree conversion efficient,
+     ```javascript
+     <ul>
+       <li key="2015">Duke</li>
+       <li key="2016">Villanova</li>
+     </ul>
+
+     <ul>
+       <li key="2014">Connecticut</li>
+       <li key="2015">Duke</li>
+       <li key="2016">Villanova</li>
+     </ul>
+     ```
+289. ### When do you need to use refs?
+     There are few use cases to go for refs
+     1. Managing focus, text selection, or media playback.
+     2. Triggering imperative animations.
+     3. Integrating with third-party DOM libraries.
+290. ### Is it prop must be named as render for render props?
+     Even though the pattern named render props, you don’t have to use a prop named render to use this pattern. i.e,  Any prop that is a function that a component uses to know what to render is technically a “render prop”. Lets take an example with the children prop for render props,
+     ```javascript
+     <Mouse children={mouse => (
+       <p>The mouse position is {mouse.x}, {mouse.y}</p>
+     )}/>
+     ```
+     Actually children prop doesn’t need to be named in the list of “attributes” in JSX element. Instead, you can keep it directly inside element,
+     ```javascript
+     <Mouse>
+       {mouse => (
+         <p>The mouse position is {mouse.x}, {mouse.y}</p>
+       )}
+     </Mouse>
+     ```
+     While using this above technique(without any name), explicitly state that children should be a function in your propTypes.
+     ```javascript
+     Mouse.propTypes = {
+       children: PropTypes.func.isRequired
+     };
+     ```
+291. ### What are the problems of using render props with pure components?
+     If you create a function inside a render method, it negates the purpose of pure component. Because the shallow prop comparison will always return false for new props, and each render in this case will generate a new value for the render prop. You can solve this issue by defining the render function as instance method.
+292. ### How do you create HOC using render props?
+     You can implement most higher-order components (HOC) using a regular component with a render prop. For example, if you would prefer to have a withMouse HOC instead of a <Mouse> component, you could easily create one using a regular <Mouse> with a render prop.
+     ```javascript
+     function withMouse(Component) {
+       return class extends React.Component {
+         render() {
+           return (
+             <Mouse render={mouse => (
+               <Component {...this.props} mouse={mouse} />
+             )}/>
+           );
+         }
+       }
+     }
+     ```
+     This way render props gives the flexibility of using either pattern.
+293. ### What is windowing technique?
+     Windowing is a technique that only renders a small subset of your rows at any given time, and can dramatically reduce the time it takes to re-render the components as well as the number of DOM nodes created. If your application renders long lists of data then this technique is recommended. Both react-window and react-virtualized are popular windowing libraries which provides several reusable components for displaying lists, grids, and tabular data.
+294. ### How do you print falsy values in JSX?
+     The falsy values such as false, null, undefined, and true are valid children but they don't render anything. If you still want to display them then you need to convert it to string. Let's take an example on how to convert to a string,
+     ```javascript
+     <div>
+       My JavaScript variable is {String(myVariable)}.
+     </div>
+     ```
+295. ### What is the typical use case of portals?
+     React portals are very useful when a parent component has overflow: hidden or has properties that affect the stacking context(z-index,position,opacity etc styles) and you need to visually “break out” of its container. For example, dialogs, global message notifications, hovercards, and tooltips.
+296. ### How do you set default value for uncontrolled component?
+     In React, the value attribute on form elements will override the value in the DOM. With an uncontrolled component, you might want React to specify the initial value, but leave subsequent updates uncontrolled. To handle this case, you can specify a **defaultValue** attribute instead of **value**.
+     ```javascript
+     render() {
+       return (
+         <form onSubmit={this.handleSubmit}>
+           <label>
+             User Name:
+             <input
+               defaultValue="John"
+               type="text"
+               ref={this.input} />
+           </label>
+           <input type="submit" value="Submit" />
+         </form>
+       );
+     }
+     ```
+     The same applies for `select` and `textArea` inputs. But you need to use **defaultChecked** for `checkbox` and `radio` inputs.
+297. ### What is your favorite React stack?
+     Even though the tech stack varies from developer to developer, the most popular stack is used in react boilerplate project code. It mainly uses Redux and redux-saga for state management and asynchronous side-effects, react-router for routing purpose, styled-components for styling react components, axios for invoking REST api, and other supported stack such as webpack, reselect, ESNext, Babel.
+     You can clone the project https://github.com/react-boilerplate/react-boilerplate and start working on any new react project.
+298. ### What is the difference between Real DOM and Virtual DOM?
+     Below are the main differences between Real DOM and Virtual DOM,
+
+     | Real DOM | Virtual DOM |
+     | ----- | ------- |
+     | Updates are slow | Updates are fast |
+     | DOM manipulation is very expensive. | DOM manipulation is very easy |
+     | You can update HTML directly. | You Can’t directly update HTML |
+     | It causes too much of memory wastage | 	There is no memory wastage|
+     | Creates a new DOM if element updates | It updates the JSX if element update|
+
+299. ### How to add a bootstrap for a react application?
+     Bootstrap can be added to your React app in a three possible ways
+     1. Using the Bootstrap CDN:
+        This is the easiest way to add bootstrap. Add both bootstrap CSS and JS resources in a head tag.
+     2. Bootstrap as Dependency:
+        If you are using a build tool or a module bundler such as Webpack, then this is the preferred option for adding Bootstrap to your React application
+        ```javascript
+        npm install bootstrap
+        ``
+     3. React Bootstrap Package:
+        In this case, you can add Bootstrap to our React app is by using a package that has rebuilt Bootstrap components to work particularly as React components. Below packages are popular in this category,
+        1. react-bootstrap
+        2. reactstrap
+300. ### Can you list down top websites or applications using react as front end framework?
+     Below are the `top 10 websites` using React as their front-end framework,
+
+     1. Facebook
+     2. Uber
+     3. Instagram
+     4. WhatsApp
+     5. Khan Academy
+     6. Airbnb
+     7. Dropbox
+     8. Flipboard
+     9. Netflix
+     10. PayPal
+301. ### Is it recommended to use CSS In JS technique in React?
+     React does not have any opinion about how styles are defined but if you are a beginner then good starting point is to define your styles in a separate *.css file as usual and refer to them using className. This functionality is not part of React but came from third-party libraries. But If you want to try a different approach(CSS-In-JS) then styled-components library is a good option.
 
 
 ## References 
