@@ -315,6 +315,9 @@
 |299| [How to add a bootstrap for a react application?](#how-to-add-a-bootstrap-for-a-react-application)|
 |300| [Can you list down top websites or applications using react as front end framework?](#can-you-list-down-top-websites-or-applications-using-react-as-front-end-framework)|
 |301| [Is it recommended to use CSS In JS technique in React?](#is-it-recommended-to-use-css-in-js-technique-in-react)|
+|302| [Do I need to rewrite all my class components with hooks?](#do-i-need-to-rewrite-all-my-class-components-with-hooks)|
+|303| [How to fetch data with React Hooks?](#how-to-fetch-data-with-react-hooks)|
+|304| [Is Hooks cover all use cases for classes?](#is-hooks-cover-all-use-cases-for-classes)|
 
 
 ## Core React
@@ -4992,6 +4995,42 @@
      10. PayPal
 301. ### Is it recommended to use CSS In JS technique in React?
      React does not have any opinion about how styles are defined but if you are a beginner then good starting point is to define your styles in a separate *.css file as usual and refer to them using className. This functionality is not part of React but came from third-party libraries. But If you want to try a different approach(CSS-In-JS) then styled-components library is a good option.
+302. ### Do I need to rewrite all my class components with hooks?
+     No. But you can try Hooks in a few components(or new components) without rewriting any existing code. Because there are no plans to remove classes in ReactJS.
+303. ### How to fetch data with React Hooks?
+     The effect hook called `useEffect` is used to fetch the data with axios from the API and to set the data in the local state of the component with the state hook’s update function.
+     Let's take an example in which it fetches list of react articles from the API
+     ```javascript
+     import React, { useState, useEffect } from 'react';
+     import axios from 'axios';
+
+     function App() {
+       const [data, setData] = useState({ hits: [] });
+
+       useEffect(async () => {
+         const result = await axios(
+           'http://hn.algolia.com/api/v1/search?query=react',
+         );
+
+         setData(result.data);
+       }, []);
+
+       return (
+         <ul>
+           {data.hits.map(item => (
+             <li key={item.objectID}>
+               <a href={item.url}>{item.title}</a>
+             </li>
+           ))}
+         </ul>
+       );
+     }
+
+     export default App;
+     ```
+     Remember we provided an empty array as second argument to the effect hook to avoid activating it on component updates but only for the mounting of the component. i.e, It fetches only for component mount.
+304. ### Is Hooks cover all use cases for classes?
+     Hooks doesn't cover all use cases of classes but there is a plan to add them soon. Currently there are no Hook equivalents to the uncommon **getSnapshotBeforeUpdate** and **componentDidCatch** lifecycles yet.
 
 
 ## References 
