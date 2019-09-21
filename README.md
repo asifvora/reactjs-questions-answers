@@ -321,6 +321,20 @@
 |305| [What is the stable release for hooks support?](#what-is-the-stable-release-for-hooks-support)|
 |306| [Why do we use square brackets in useState?](#why-do-we-use-square-brackets-in-usestate?)|
 |307| [What are the sources used for introducing hooks?](#what-are-the-sources-used-for-introducing-hooks)|
+|308| [How do you access imperative API of web components?](#how-do-you-access-imperative-api-of-web-components)|
+|309| [What is formik?](#what-is-formik)|
+|310| [What are typical middleware choices for handling asynchronous calls in Redux?](#what-are-typical-middleware-choices-for-handling-asynchronous-calls-in-redux)|
+|311| [Is browsers understand JSX code?](#is-browsers-understand-jsx-code)|
+|312| [Describe about data flow in react?](#describe-about-data-flow-in-react)|
+|313| [What is react scripts?](#what-is-react-scripts)|
+|314| [What are the features of create react app?](#what-are-the-features-of-create-react-app)|
+|315| [What is the purpose of renderToNodeStream method?](#what-is-the-purpose-of-rendertonodestream-method)|
+|316| [What is MobX?](#what-is-mobx)|
+|317| [What are the differences between Redux and MobX?](#what-are-the-differences-between-redux-and-mobx)|
+|318| [Should I learn ES6 before learning ReactJS?](#should-i-learn-es6-before-learning-reactjs)|
+|319| [What is Concurrent Rendering?](#what-is-concurrent-rendering)|
+|320| [What is the difference between async mode and concurrent mode?](#what-is-the-difference-between-async-mode-and-concurrent-mode)|
+|321| [Can I use javascript urls in react16.9?](#can-i-use-javascript-urls-in-react16.9)|
 
 ## Core React
 
@@ -5053,6 +5067,104 @@
      3. State variables and state cells in DisplayScript.
      4. Subscriptions in Rx.
      5. Reducer components in ReasonReact.
+
+308. ### How do you access imperative API of web components?
+     Web Components often expose an imperative API to implement its functions. You will need to use a **ref** to interact with the DOM node directly if you want to access imperative API of a web component. But if you are using third-party Web Components, the best solution is to write a React component that behaves as a **wrapper** for your Web Component.
+309. ### What is formik?
+     Formik is a small react form library that helps you with the three major problems,
+     1. Getting values in and out of form state
+     2. Validation and error messages
+     3. Handling form submission
+
+310. ### What are typical middleware choices for handling asynchronous calls in Redux?
+     Some of the popular middleware choices for handling asynchronous calls in Redux eco system are `Redux Thunk, Redux Promise, Redux Saga`.
+311. ### Is browsers understand JSX code?
+     No, browsers can't understand JSX code. You need a transpiler to convert your JSX to regular Javascript that browsers can understand. The most widely used transpiler right now is Babel.
+312. ### Describe about data flow in react?
+     React implements one-way reactive data flow using props which reduce boilerplate and is easier to understand than traditional two-way data binding.
+313. ### What is react scripts?
+     The `react-scripts` package is a set of scripts from the create-react-app starter pack which helps you kick off projects without configuring. The `react-scripts start` command sets up the development environment and starts a server, as well as hot module reloading.
+314. ### What are the features of create react app?
+     Below are the list of some of the features provided by create react app.
+     1. React, JSX, ES6, Typescript and Flow syntax support.
+     2. Autoprefixed CSS
+     3. A live development server
+     4. A fast interactive unit test runner with built-in support for coverage reporting
+     5. A build script to bundle JS, CSS, and images for production, with hashes and sourcemaps
+     6. An offline-first service worker and a web app manifest, meeting all the Progressive Web App criteria.
+
+315. ### What is the purpose of renderToNodeStream method?
+     The `ReactDOMServer#renderToNodeStream` method is used to generate HTML on the server and send the markup down on the initial request for faster page loads. It also helps search engines to crawl your pages easily for SEO purposes.
+     **Note:** Remember this method is not available in the browser but only server.
+316. ### What is MobX?
+     MobX is a simple, scalable and battle tested state management solution for applying functional reactive programming (TFRP). For reactJs application, you need to install below packages,
+     ```bash
+     npm install mobx --save
+     npm install mobx-react --save
+     ```
+317. ### What are the differences between Redux and MobX?
+     Below are the main differences between Redux and MobX,
+
+     | Topic | Redux | MobX |
+     | ----- | ------- | ------- 
+     | Definition| It is a javascript library for managing the application state | It is a library for reactively managing the state of your applications |
+     | Programming | It is mainly written in ES6 | It is written in JavaScript(ES5) |
+     | Data Store | There is only one large store exist for data storage | There is more than one store for storage |
+     | Usage | Mainly used for large and complex applications | Used for simple applications |
+     | Performance | Need to be improved | Provides better performance |
+     | How it stores | Uses JS Object to store | Uses observable to store the data |
+
+318. ### Should I learn ES6 before learning ReactJS?
+     No, you don’t have to learn es2015/es6 to learn react. But you may find many resources or React ecosystem uses ES6 extensively. Let's see some of the frequently used ES6 features,
+     1. Destructuring: To get props and use them in a component
+     ```javascript
+     // in es 5
+      var someData = this.props.someData
+      var dispatch = this.props.dispatch
+
+     // in es6
+     const { someData, dispatch } = this.props
+     ```
+     2. Spread operator: Helps in passing props down into a component
+     ```javascript
+     // in es 5
+     <SomeComponent someData={this.props.someData} dispatch={this.props.dispatch} />
+
+     // in es6
+     <SomeComponent {...this.props} />
+     ```
+     3. Arrow functions: Makes compact syntax
+     ```javascript
+     // es 5
+     var users = usersList.map(function (user) {
+      return <li>{user.name}</li>
+     })
+     // es 6
+     const users = usersList.map(user => <li>{user.name}</li>);
+     ```
+319. ### What is Concurrent Rendering?
+     The Concurrent rendering makes React apps to be more responsive by rendering component trees without blocking the main UI thread. It allows React to interrupt a long-running render to handle a high-priority event. i.e, When you enabled concurrent Mode, React will keep an eye on other tasks that need to be done, and if there's something with a higher priority it will pause what it is currently rendering and let the other task finish first. You can enable this in two ways,
+     ```javascript
+     // 1. Part of an app by wrapping with ConcurrentMode
+     <React.unstable_ConcurrentMode>
+       <Something />
+     </React.unstable_ConcurrentMode>
+
+     // 2. Whole app using createRoot
+     ReactDOM.unstable_createRoot(domNode).render(<App />);
+     ```
+320. ### What is the difference between async mode and concurrent mode?
+     Both refers the same thing. Previously concurrent Mode being referred to as "Async Mode" by React team. The name has been changed to highlight React’s ability to perform work on different priority levels. So it avoids the confusion from other approaches to Async Rendering.
+321. ### Can I use javascript urls in react16.9?
+     Yes, you can use javascript: URLs but it will log a warning in the console. Because URLs starting with javascript: are dangerous by including unsanitized output in a tag like <a href> and create a security hole.
+     ```javascript
+     const companyProfile = {
+       website: "javascript: alert('Your website is hacked')",
+     };
+     // It will log a warning
+     <a href={companyProfile.website}>More details</a>
+     ```
+     Remember that the future versions will throw an error for javascript URLs.
 
 ## References 
  
