@@ -1,6 +1,11 @@
 # React Questions & Answers
 
-> Click :star:if you like the project. Pull Request are highly appreciated.
+> Click :star:if you like the project.
+
+## Downloading PDF/Epub formats
+
+You can download the PDF and Epub version of this repository from the latest run on the [actions tab](https://github.com/sudheerj/reactjs-interview-questions/actions).
+
 
 ### Table of Contents
 
