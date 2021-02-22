@@ -8,7 +8,7 @@ https://reactjs-questions-answers.netlify.app/
 
 ## Downloading PDF/Epub formats
 
-You can download the PDF and Epub version of this repository from the latest run on the [actions tab](https://github.com/sudheerj/reactjs-interview-questions/actions).
+You can download the PDF and Epub version of this repository from the latest run on the [actions tab](https://github.com/asifvora/reactjs-questions-answers/actions).
 
 
 ### Table of Contents
