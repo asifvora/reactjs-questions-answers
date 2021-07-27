@@ -4,7 +4,9 @@
 
 
 ## Visit Document Website
-https://reactjs-questions-answers.netlify.app/
+
+
+https://reactjs-questions-answers.vercel.app/#/
 
 ## Downloading PDF/Epub formats
 
